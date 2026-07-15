@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Árbol de Amor Animado</title>
+  <!-- Autoría y derechos -->
+  <meta name="author" content="Zero">
+  <meta name="copyright" content="Zero - Código libre no comercial">
+  <meta name="description"
+    content="Árbol de Amor Animado: una sorpresa interactiva y romántica para dedicar a tu pareja o ser querido. Código libre para uso personal, educativo o de inspiración.">
+  <meta name="keywords"
+    content="amor, sorpresa, romántico, dedicatoria, animación, árbol, corazones, pareja, aniversario, regalo digital">
+  <meta name="robots" content="index, follow">
+  <!-- Fuentes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="Css/style.css">
+  <link rel="stylesheet" href="Css/style.mobile.css" media="only screen and (max-width: 600px)">
+</head>
+
+<body>
+  <!-- Pantalla Inicial — Overlay de Disculpa -->
+  <div id="start-overlay" class="start-overlay">
+
+    <!-- Partículas de luciérnagas (generadas por JS) -->
+    <div class="fireflies-container" id="fireflies-container"></div>
+
+    <!-- Texto fantasma gigante de fondo -->
+    <div class="ghost-bg-text" aria-hidden="true">Hola :') </div>
+
+    <!-- Contenido central -->
+    <div class="overlay-content">
+
+      <!-- Ícono decorativo superior -->
+      <div class="overlay-deco-icon" aria-hidden="true">🌙</div>
+
+      <!-- Mensaje principal -->
+      <p class="overlay-main-message">
+        Sé que querias que me alejara<br>
+        <span class="overlay-sub-message">Lo hare, pero te preparé algo con todo mi corazón.</span>
+      </p>
+
+      <!-- Contenedor para GIF / imagen de mascota -->
+      <div class="cute-gif-wrapper">
+        <img src="" alt="Un abrazo de perdón" class="cute-gif" id="apology-gif" onerror="this.style.display='none'" />
+        <!-- Corazón de respaldo si no hay GIF -->
+        <div class="fallback-heart" id="fallback-heart">🩹</div>
+      </div>
+
+      <!-- Botón destacado estilo píldora con glow lavanda -->
+      <button id="start-btn" class="start-btn">
+        Ábrelo, por favor 🥺
+      </button>
+
+      <!-- Pie de página íntimo -->
+      <p class="overlay-footer">© 2026 creado con mucho arrepentimiento y amor para ti</p>
+    </div>
+
+  </div>
+  <div id="floating-objects"></div>
+  
+  <!-- Paisaje Nocturno -->
+  <div class="night-sky">
+    <!-- Luna Creciente -->
+    <div class="crescent-moon"></div>
+    
+    <!-- Estrellas Fugaces -->
+    <div class="shooting-stars">
+      <div class="shooting-star" style="top: 15%; left: 10%; animation-delay: 2s;"></div>
+      <div class="shooting-star" style="top: 30%; left: 70%; animation-delay: 8s;"></div>
+      <div class="shooting-star" style="top: 50%; left: 40%; animation-delay: 15s;"></div>
+    </div>
+  </div>
+
+  <!-- Vegetación en la Base -->
+  <div class="vegetation-base">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="veg-svg">
+      <!-- Capa de césped profundo -->
+      <path class="veg-back" d="M0,120 L0,50 Q30,70 60,30 T120,60 T180,20 T240,70 T300,10 T360,60 T420,20 T480,70 T540,30 T600,80 T660,20 T720,70 T780,10 T840,60 T900,20 T960,70 T1020,30 T1080,80 T1140,20 T1200,60 L1200,120 Z" />
+      
+      <!-- Hojas de menta y romero esporádicas -->
+      <path class="veg-mid" d="M100,120 Q120,60 110,40 Q130,50 120,120 Z M250,120 Q240,50 260,30 Q270,60 250,120 Z M450,120 Q470,40 450,20 Q440,60 460,120 Z M650,120 Q630,50 650,10 Q660,60 640,120 Z M850,120 Q870,30 850,20 Q840,60 860,120 Z M1050,120 Q1030,40 1050,10 Q1060,50 1040,120 Z" />
+      
+      <!-- Siluetas de rosas y tallos -->
+      <circle cx="150" cy="50" r="8" class="veg-front"/>
+      <path class="veg-front" d="M150,120 Q145,80 150,58" fill="none" stroke="#020408" stroke-width="2"/>
+      
+      <circle cx="550" cy="40" r="10" class="veg-front"/>
+      <path class="veg-front" d="M550,120 Q555,80 550,50" fill="none" stroke="#020408" stroke-width="2"/>
+      
+      <circle cx="950" cy="45" r="9" class="veg-front"/>
+      <path class="veg-front" d="M950,120 Q945,80 950,54" fill="none" stroke="#020408" stroke-width="2"/>
+      
+      <!-- Césped alto del frente -->
+      <path class="veg-front" d="M0,120 L0,70 Q20,40 40,80 T80,50 T120,90 T160,40 T200,80 T240,50 T280,100 T320,60 T360,90 T400,40 T440,80 T480,50 T520,100 T560,60 T600,90 T640,40 T680,80 T720,50 T760,100 T800,60 T840,90 T880,40 T920,80 T960,50 T1000,100 T1040,60 T1080,90 T1120,40 T1160,80 T1200,50 L1200,120 Z" />
+    </svg>
+  </div>
+  <div class="dedication-text" id="dedication-text">
+    <div class="signature" id="signature"></div>
+  </div>
+  <div class="tree-container" id="tree-container"></div>
+
+  <!-- Botón de Música Premium -->
+  <button id="music-btn" class="music-btn">
+    <svg id="music-icon-svg" viewBox="0 0 24 24" width="24" height="24">
+      <path fill="currentColor"
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+    </svg>
+  </button>
+
+  <audio src="Music/pianoHonot.mpeg" id="bg-music" preload="auto"></audio>
+  <script src="Js/script.js"></script>
+</body>
+
+</html>

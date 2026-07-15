@@ -1,0 +1,590 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+/* =========================================================
+   OVERLAY DE DISCULPA — Diseño íntimo y romántico oscuro
+   ========================================================= */
+
+.start-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: radial-gradient(ellipse at 50% 60%, #0d0820 0%, #060410 60%, #000000 100%);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.start-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* --- Partículas luciérnaga --- */
+.fireflies-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.firefly {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #b8f5a0;
+  box-shadow: 0 0 6px 3px rgba(180, 245, 160, 0.6), 0 0 14px 6px rgba(180, 245, 160, 0.15);
+  animation: firefly-float linear infinite;
+  opacity: 0;
+}
+
+@keyframes firefly-float {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  15%  { opacity: 1; }
+  50%  { opacity: 0.6; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--fx), var(--fy)) scale(1.2); }
+}
+
+/* --- Texto fantasma de fondo --- */
+.ghost-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(5rem, 18vw, 14rem);
+  color: rgba(180, 140, 255, 0.07);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  z-index: 1;
+  animation: ghost-pulse 6s ease-in-out infinite;
+}
+
+@keyframes ghost-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* --- Tarjeta de contenido central --- */
+.overlay-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: 3rem 2.8rem 2.2rem;
+  max-width: 480px;
+  width: 90vw;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(180, 140, 255, 0.18);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 0 60px rgba(140, 90, 255, 0.12),
+    0 4px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: card-appear 1s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes card-appear {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- Ícono lunar decorativo --- */
+.overlay-deco-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(180, 140, 255, 0.5));
+  animation: icon-sway 4s ease-in-out infinite;
+}
+
+@keyframes icon-sway {
+  0%, 100% { transform: rotate(-8deg); }
+  50%       { transform: rotate(8deg); }
+}
+
+/* --- Mensaje principal --- */
+.overlay-main-message {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+  font-style: italic;
+  font-weight: 500;
+  color: #f0e8ff;
+  text-align: center;
+  line-height: 1.75;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(200, 160, 255, 0.25);
+}
+
+.overlay-sub-message {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88em;
+  font-style: normal;
+  font-weight: 300;
+  color: rgba(210, 190, 255, 0.8);
+  display: block;
+  margin-top: 0.4em;
+  letter-spacing: 0.02em;
+}
+
+/* --- Contenedor del GIF / mascota --- */
+.cute-gif-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cute-gif {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 16px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(180, 140, 255, 0.4));
+}
+
+/* Si no hay GIF, muestra el corazón curita de respaldo */
+.cute-gif[src=""] {
+  display: none;
+}
+
+.fallback-heart {
+  font-size: 4.5rem;
+  line-height: 1;
+  animation: heart-beat 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 120, 150, 0.5));
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  25%       { transform: scale(1.15); }
+  40%       { transform: scale(0.95); }
+  60%       { transform: scale(1.08); }
+}
+
+/* Ocultar respaldo si el GIF existe y cargó */
+.cute-gif-wrapper:has(.cute-gif[src]:not([src=""])) .fallback-heart {
+  display: none;
+}
+
+/* --- Botón píldora con glow lavanda --- */
+.start-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.9em 2.6em;
+  background: linear-gradient(135deg, #9b6dff 0%, #c084fc 50%, #818cf8 100%);
+  border: none;
+  border-radius: 50px;
+  color: #ffffff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(155, 109, 255, 0.55),
+    0 0 45px rgba(155, 109, 255, 0.25),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: btn-glow-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes btn-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(155, 109, 255, 0.55), 0 0 45px rgba(155, 109, 255, 0.25), 0 4px 20px rgba(0,0,0,0.3); }
+  50%       { box-shadow: 0 0 30px rgba(192, 132, 252, 0.75), 0 0 65px rgba(192, 132, 252, 0.35), 0 4px 24px rgba(0,0,0,0.3); }
+}
+
+.start-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-20deg);
+  animation: btn-shimmer 3.5s ease-in-out infinite;
+}
+
+@keyframes btn-shimmer {
+  0%   { left: -60%; }
+  50%  { left: 110%; }
+  100% { left: 110%; }
+}
+
+.start-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 35px rgba(192, 132, 252, 0.8),
+    0 0 70px rgba(192, 132, 252, 0.4),
+    0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.start-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* --- Pie de página del overlay --- */
+.overlay-footer {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: rgba(180, 150, 255, 0.4);
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+
+
+#fireworks-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: #e60026;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-shadow: 2px 2px 8px #ffb3b3;
+    z-index: 2;
+    letter-spacing: 0.5rem;
+    user-select: none;
+    display: flex;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.letter {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.tree-container {
+  width: 520px !important;
+  height: 520px !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.tree-container.sway-active {
+  animation: sway 6s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes sway {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  50% { transform: translate(-50%, -50%) rotate(2deg); }
+}
+
+.tree-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  will-change: transform, filter;
+}
+
+.tree-container svg path {
+  transition: fill-opacity 0.5s, stroke-dashoffset 1.2s;
+}
+
+.tree-container svg.move-and-blur {
+  transition: transform 1.5s cubic-bezier(.77,0,.18,1), filter 1.5s ease;
+  transform: translateX(180px) scale(1.15);
+  filter: blur(2px);
+}
+
+.animated-heart {
+  transform-origin: center;
+  animation: beat 1.5s infinite ease-in-out;
+}
+
+.animated-heart:nth-child(odd) { animation-delay: 0.3s; }
+.animated-heart:nth-child(3n) { animation-delay: 0.6s; }
+.animated-heart:nth-child(5n) { animation-delay: 0.9s; }
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.15); }
+  50% { transform: scale(0.95); }
+  70% { transform: scale(1.05); }
+}
+
+.dedication-text {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Diseño flotante — sin caja, sin fondo */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding: 0.5em 1em;
+
+  /* Tipografía */
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  line-height: 1.85;
+  color: #ffffff;
+  text-align: center;
+
+  /* Sombra para máxima legibilidad nocturna */
+  text-shadow: 0 0 8px rgba(255,255,255,0.6), 0 0 15px rgba(0,0,0,0.8);
+
+  /* Ancho controlado para saltos de línea correctos */
+  width: 90%;
+  max-width: 680px;
+  min-width: 260px;
+
+  /* El texto usa innerHTML, así que white-space normal */
+  white-space: normal;
+  word-break: break-word;
+
+  /* Ocultamiento y transición de entrada */
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 75vh;
+  overflow-y: auto;
+  padding-bottom: 50px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  transition: opacity 1.5s ease, top 1.5s cubic-bezier(.77, 0, .18, 1);
+}
+
+/* Ocultar barra de desplazamiento para Chrome, Safari y Opera */
+.dedication-text::-webkit-scrollbar {
+  display: none;
+}
+
+.dedication-text.typing {
+  opacity: 1;
+  top: 50%;
+  pointer-events: auto; /* Permite al usuario hacer scroll manual */
+}
+
+/* Cursor parpadeante en línea — gestionado como <span> por JS */
+.tw-cursor {
+  display: inline;
+  color: rgba(255, 240, 220, 0.85);
+  font-style: normal;
+  font-weight: 300;
+  animation: cursor-blink 0.65s step-end infinite;
+  margin-left: 1px;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+
+
+#floating-objects {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.sakura-petal {
+  position: absolute;
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fairy-dust {
+  position: absolute;
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 9;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.8);
+}
+
+.signature {
+  position: relative;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  margin-top: 0.5em;
+  margin-left: 0;
+  display: block;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #c93b4a;
+  opacity: 0;
+  z-index: 5;
+  white-space: pre;
+  pointer-events: none;
+  transition: opacity 0.7s;
+}
+
+.signature.visible {
+  opacity: 1;
+  animation: signature-draw 2.2s steps(24) forwards;
+}
+
+@keyframes signature-draw {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+
+/* Responsivo para móviles: la caja ocupa casi todo el ancho arriba del árbol */
+@media (max-width: 700px) {
+  .dedication-text {
+    left: 50%;
+    right: auto;
+    top: 8%;
+    transform: translateX(-50%) translateY(0);
+    min-width: 0;
+    max-width: 95vw;
+    width: 95vw;
+    font-size: 1.6rem;
+    padding: 0.7em;
+  }
+  .signature {
+    font-size: 2rem;
+  }
+}
+
+/* =========================================================
+   PAISAJE NOCTURNO — Luna, Estrellas, Vegetación
+   ========================================================= */
+.night-sky {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 1; /* Detrás del árbol y textos */
+}
+
+/* Luna Creciente */
+.crescent-moon {
+  position: absolute;
+  top: 8%;
+  right: 10%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: -15px 15px 0 5px rgba(255, 255, 200, 0.9),
+              -15px 15px 25px 5px rgba(255, 255, 200, 0.4);
+  transform: rotate(-15deg);
+}
+
+/* Estrellas Fugaces */
+.shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,1), transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 5px 1px rgba(255,255,255,0.8);
+  opacity: 0;
+  transform: rotate(-45deg);
+  animation: shooting 8s infinite;
+}
+
+@keyframes shooting {
+  0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; width: 0; }
+  10% { opacity: 1; width: 120px; }
+  20% { transform: translateX(-300px) translateY(300px) rotate(-45deg); opacity: 0; width: 0; }
+  100% { opacity: 0; }
+}
+
+/* Vegetación Base */
+.vegetation-base {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 18vh;
+  min-height: 100px;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 -5px 15px rgba(0,0,0,0.6));
+}
+
+.veg-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Colores de las siluetas botánicas - tonos oscuros para recortarse contra el cielo de noche */
+.veg-back { fill: #070c14; }
+.veg-mid { fill: #04080e; }
+.veg-front { fill: #020408; stroke: #020408; }
+
+.music-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+}
