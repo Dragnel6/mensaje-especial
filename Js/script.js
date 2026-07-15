@@ -240,6 +240,11 @@ function showSignature() {
   let firma = getURLParam('firma');
   signature.textContent = firma ? decodeURIComponent(firma) : "Con mucho amor y arrepentimiento, Carlitos";
   signature.classList.add('visible');
+  
+  // Scroll para que la firma no quede oculta
+  setTimeout(() => {
+    dedication.scrollTop = dedication.scrollHeight;
+  }, 50);
 }
 
 
